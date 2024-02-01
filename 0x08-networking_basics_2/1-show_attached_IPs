@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Script to display all active IPv4 Ip's
+
+ip -o -4 address show | awk '{print $4}' | sed 's/\/[0-9]*//'
