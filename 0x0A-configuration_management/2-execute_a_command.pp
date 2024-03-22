@@ -1,8 +1,8 @@
-# File script to close process killmenow
+# Kills a process name killmenow
 
-exec { 'kill_killmenow_process':
-    path        => '/usr/bin',
-    command     => 'pkill -f killmenow',
-    refreshonly => true,
-    subscribe   => Exec['start_killmenow_process'],
+exec { 'pkill killmenow':
+  path     => '/usr/bin',
+  command  => 'pkill killmenow',
+  provider => shell,
+  returns  => [0, 1]
 }
