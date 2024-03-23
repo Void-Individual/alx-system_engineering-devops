@@ -7,7 +7,7 @@ exec { 'install_flask':
 }
 
 exec { 'install_werkzeug':
-    command => '/usr/bin/pip3 install Werkzeug==2.1.1',
+    command => '/usr/bin/pip3 install werkzeug==2.1.1',
     path    => '/usr/bin',
     creates => '/usr/local/lib/python3.8/dist-packages/werkzeug/__init__.py'
 }
