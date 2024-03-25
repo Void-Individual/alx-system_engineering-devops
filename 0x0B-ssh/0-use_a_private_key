@@ -1,10 +1,4 @@
 #!/usr/bin/env bash
 # A script to connect to a ubuntu server
 
-private_key="~/.ssh/school"
-
-user="ubuntu"
-
-server_address="52.87.231.247"
-
-ssh -i "$private_key" "$user@$server_address"
+ssh -i ~/.ssh/school ubuntu@52.91.151.166
