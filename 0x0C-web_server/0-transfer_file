@@ -12,7 +12,7 @@ user="$3"
 
 if [ "$4" ]; then
     key="$4"
-    scp -o "StrictHostKeyChecking=yes" -i "$key" "$file_path" "$user@$ip_ad:~/"
+    scp -o "StrictHostKeyChecking=no" -i "$key" "$file_path" "$user@$ip_ad:~/"
 else
-    scp -o "StrictHostKeyChecking=yes" "$file_path" "$user@$ip_ad:~/"
+    scp -o "StrictHostKeyChecking=no" "$file_path" "$user@$ip_ad:~/"
 fi
