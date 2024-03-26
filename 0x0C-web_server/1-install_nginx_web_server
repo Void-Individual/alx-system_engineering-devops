@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# A script to install nginx on a server and to listen on a port
+
+sudo apt-get update
+sudo apt-get install -y nginx
+
+echo "<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello World!</title>
+</head>
+<body>
+    <h1>Hello World!</h1>
+</body>
+</html>" | sudo tee /hello.html > /dev/null
+
+sudo tee /etc/nginx/sites-available/default > /dev/null <<EOF
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /;
+    index hello.html;
+
+    server_name _;
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+}
+EOF
+
+sudo service nginx restart
