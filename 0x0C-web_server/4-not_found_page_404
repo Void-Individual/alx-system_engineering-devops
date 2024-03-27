@@ -7,7 +7,7 @@
 sudo apt-get update
 sudo apt-get install -y nginx
 
-echo "Hello World!" | sudo tee /hello.txt > /dev/null
+echo "Hello World!" | sudo tee /hello.html > /dev/null
 
 echo "Ceci n'est pas une page" | sudo tee /my_404.html > /dev/null
 
@@ -17,14 +17,14 @@ server {
     listen [::]:80 default_server;
 
     root /;
-    index hello.txt;
+    index hello.html;
 
     server_name _;
 
     error_page 404 /my_404.html;
 
     location /redirect_me {
-        return 301 http://otvoidserver.tech;
+        return 301 https://github.com/Void-Individual;
     }
 
     location / {
