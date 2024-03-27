@@ -9,7 +9,7 @@ sudo apt-get install -y nginx
 
 echo "Hello World!" | sudo tee /hello.txt > /dev/null
 
-echo "Ceci n'est pas une page" | sudo tee /my_404.txt > /dev/null
+echo "Ceci n'est pas une page" | sudo tee /my_404.html > /dev/null
 
 sudo tee /etc/nginx/sites-available/default > /dev/null <<EOF
 server {
