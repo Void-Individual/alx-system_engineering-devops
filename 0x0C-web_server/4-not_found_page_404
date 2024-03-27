@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Script to configure an nginx server so /redirect_me leads to another page
+
+#!/usr/bin/env bash
+# A script to install nginx on a server and to listen on a port
+
+sudo apt-get update
+sudo apt-get install -y nginx
+
+echo "Hello World!" | sudo tee /hello.txt > /dev/null
+
+echo "Ceci n'est pas une page" | sudo tee /my_404.txt > /dev/null
+
+sudo tee /etc/nginx/sites-available/default > /dev/null <<EOF
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /;
+    index hello.txt;
+
+    server_name _;
+
+    error_page 404 /my_404.html;
+
+    location /redirect_me {
+        return 301 http://otvoidserver.tech;
+    }
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+}
+EOF
+
+sudo service nginx restart
