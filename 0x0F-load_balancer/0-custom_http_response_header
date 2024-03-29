@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# A script to install nginx on a server and to listen on a port
+# A script to install and configure nginx on a server such that its http response contains a custom header
 
 sudo apt-get update
 sudo apt-get install -y nginx
@@ -7,7 +7,7 @@ sudo apt-get install -y nginx
 echo "Hello World!" | sudo tee /hello.html > /dev/null
 
 echo "Ceci n'est pas une page" | sudo tee /my_404.html > /dev/null
-
+host=$(hostname)
 sudo tee /etc/nginx/sites-available/default > /dev/null <<EOF
 server {
     listen 80 default_server;
@@ -25,6 +25,7 @@ server {
     }
 
     location / {
+        add_header X-Served-By "$host";
         try_files \$uri \$uri/ =404;
     }
 }
