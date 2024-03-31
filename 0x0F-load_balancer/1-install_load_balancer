@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Script to install and configure HAproxy on your lb-01 server.
+
+# update and upgrade previous apps
+sudo apt-get update && sudo apt-get -y upgrade
+# Install this property,
+sudo apt install software-properties-common
+# Add the personal package archive to the list of apt sources
+sudo add-apt-repository -y ppa:vbernat/haproxy-2.9
+
+# Install haproxy
+sudo apt install -y haproxy
+
+# Variable to contain the new backend config
+new_config='frontend http_front\n\tbind *:80\n\toption forwardfor\n\tdefault_backend http_back\n\nbackend http_back\n\tbalance roundrobin\n\tserver 523915-web-01 52.91.151.166:80 check\n\tserver 523915-web-02 35.174.211.254:80 check'
+# Variable to contain the filepath
+config_file="/etc/haproxy/haproxy.cfg"
+
+# Append a new backend pattern to the config file
+echo -e "\n$new_config" | sudo tee -a "$config_file" >> /dev/null
+
+# Restart haproxy
+sudo service haproxy restart
+# Enable haproxy
+sudo systemctl enable haproxy
