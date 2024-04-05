@@ -9,11 +9,14 @@ get_info() {
     local subdomain="${sub}.${domain}"
 
     # Use dig to retrieve info about the subdomain
-    local output=$(dig "$subdomain" | grep -A 1 'ANSWER SECTION:')
+    local output
+    output=$(dig "$subdomain" | grep -A 1 'ANSWER SECTION:')
 
      # Extract and display the record type and destination from the dig output
-    local record_type=$(echo $(echo "$output" | awk '{print $4}') | tr -d '\n')
-    local destination=$(echo $(echo "$output" | awk '{print $5}') | tr -d '\n')
+    local record_type
+    record_type=$( (echo "$output" | awk '{print $4}') | tr -d '\n')
+    local destination
+    destination=$( (echo "$output" | awk '{print $5}') | tr -d '\n')
 
     # Display the information
     echo "The subdomain $sub is a $record_type record and points to $destination"
@@ -27,7 +30,7 @@ if [ $# -eq 1 ]; then
     get_info "$domain" lb-01
     get_info "$domain" web-01
     get_info "$domain" web-02
-else
+elif [ $# -gt 2 ]; then
     # Subdomain specified, display information for the specified subdomain
     sub="$2"
     get_info "$domain" "$sub"
