@@ -40,12 +40,12 @@ frontend http_front
         default_backend http_back
 
 frontend www-https
-        bind *:443 ssl crt /etc/haproxy/ssl/www.otvoidspace.tech/www.otvoidspace.tech.pem
+        bind *:443 ssl crt /etc/letsencrypt/live/www.otvoidspace.tech/www.otvoidspace.tech.pem
         http-request set-header X-Forwarded-Proto https
         default_backend http_back
 
 backend http_back
         balance roundrobin
-        redirect scheme https if !{ ssl_fc }
-        server 523915-web-01 52.91.151.166:80 check
-        server 523915-web-02 35.174.211.254:80 check
+        redirect scheme https code 301 if !{ ssl_fc }
+        server 523915-web-01 52.91.151.166:80
+        server 523915-web-02 35.174.211.254:80
