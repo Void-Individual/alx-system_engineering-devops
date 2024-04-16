@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # Script to configure nginx to run as an nginx user
-sudo apt-get update
-sudo apt-get -y install nginx
+
 sudo sed -i "s/user .*/user nginx;/" /etc/nginx/nginx.conf
 sudo sed -i 's/80/8080/g' /etc/nginx/sites-available/default
 su nginx -c "service nginx restart"
