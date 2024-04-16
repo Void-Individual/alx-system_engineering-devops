@@ -28,6 +28,4 @@ server {
         try_files \$uri \$uri/ =404;
     }
 }
-EOF
-
 sudo service nginx restart
