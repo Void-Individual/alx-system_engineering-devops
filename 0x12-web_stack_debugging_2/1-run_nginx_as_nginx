@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Script to configure nginx to run as an nginx user
+if ! id "nginx"; then
+	sudo adduser --disabled-password --gecos "" "nginx"
+fi
+sudo sed -i "s/user .*/user nginx;/" /etc/nginx/nginx.conf
+sudo sed -i 's/listen 80 default_server;/listen 80 default_server;\n\tlisten 8080 default_server;/' /etc/nginx/sites-available/default
+sudo service nginx restart
