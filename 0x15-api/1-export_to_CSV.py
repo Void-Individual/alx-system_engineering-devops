@@ -23,5 +23,5 @@ if __name__ == "__main__":
 
     filename = f"{userId}.csv"
     with open(filename, mode='w', newline='') as file:
-        writer = csv.writer(file)
+        writer = csv.writer(file, quoting=csv.QUOTE_ALL)
         writer.writerows(data)
