@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 """Python script to return information from an API"""
 
-import sys
 import requests
+import sys
+
 
 if __name__ == "__main__":
 
@@ -28,6 +29,6 @@ if __name__ == "__main__":
         else:
             undone += 1
         total += 1
-    print(f"Employee {name} is done with tasks({done}/{total})")
+    print(f"Employee {name} is done with tasks({done}/{total}):")
     for title in titles:
         print(f"\t {title}")
