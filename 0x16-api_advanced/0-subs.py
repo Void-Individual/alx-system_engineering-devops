@@ -17,14 +17,11 @@ def number_of_subscribers(subreddit):
     # Send a get request to the reddit API
     response = requests.get(url, headers=header, allow_redirects=False)
 
-    # If the response is successful with status code 200
     if response.status_code == 200:
+    # If the response is successful with status code 200
         data = response.json()
-        count = data['data']['subscribers']
-        return count
-    elif response.status_code == 302:
-        # Redirect response, indicates an invalid subreddit
-        return count
-    else:
-        # For any other reason, return 0
-        return count
+        if 'data' in data:
+            if 'subscribers' in data['data']:
+                count = data['data']['subscribers']
+
+    return count
