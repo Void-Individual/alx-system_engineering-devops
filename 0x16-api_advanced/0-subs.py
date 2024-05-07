@@ -12,7 +12,7 @@ def number_of_subscribers(subreddit):
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
 
     # A custom header to avoid being denied access by reddit
-    header = {"User-Agent": "Mozilla/5.0"}
+    header = {"User-Agent": "Ubuntu/22.0"}
 
     # Send a get request to the reddit API
     response = requests.get(url, headers=header, allow_redirects=False)
