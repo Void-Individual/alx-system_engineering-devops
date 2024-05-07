@@ -12,13 +12,13 @@ def number_of_subscribers(subreddit):
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
 
     # A custom header to avoid being denied access by reddit
-    header = {"User-Agent": "Tolu's Reddit API Client"}
+    header = {"User-Agent": "Mozilla/5.0"}
 
     # Send a get request to the reddit API
     response = requests.get(url, headers=header, allow_redirects=False)
 
     if response.status_code == 200:
-    # If the response is successful with status code 200
+        # If the response is successful with status code 200
         data = response.json()
         if 'data' in data:
             if 'subscribers' in data['data']:
