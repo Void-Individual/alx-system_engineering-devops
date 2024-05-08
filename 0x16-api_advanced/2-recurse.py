@@ -31,7 +31,7 @@ def recurse(subreddit, hot_list=[], after=None):
             posts = data['data']['children']
             add_title(hot_list, posts)
             after = data['data']['after']
-            
+
             if not after:
                 return hot_list
             return recurse(subreddit, hot_list, after)
