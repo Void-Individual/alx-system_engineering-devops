@@ -23,11 +23,11 @@ def recurse(subreddit, hot_list=[], after=None):
             if len(posts) == 0:
                 return hot_list
 
-            post = posts[0]
-            post_data = post['data']
-            title = post_data['title']
-            after = post_data['name']
-            hot_list.append(title)
+            for post in posts:
+                post_data = post['data']
+                title = post_data['title']
+                hot_list.append(title)
+            after = posts[-1]['data']['name']
             return recurse(subreddit, hot_list, after)
         else:
             return hot_list
