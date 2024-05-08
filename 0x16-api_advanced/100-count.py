@@ -43,8 +43,10 @@ def count_words(subreddit, word_list, word_dict=None, after=None):
 
             return count_words(subreddit, word_list, word_dict, after)
         else:
-            sorted_items = sorted(word_dict.items(), lambda x: x[1], reverse=True)
-            sorted_titles = {item[0]: item[1] for item in sorted_items if item[1] > 0}
+            sorted_items = sorted(word_dict.items(), lambda x: x[1],
+                                  reverse=True)
+            sorted_titles = {item[0]: item[1] for item in sorted_items
+                             if item[1] > 0}
             print(sorted_titles)
     else:
         return None
