@@ -1,0 +1,6 @@
+body {
+    background-size: cover;
+    background-color: blue;
+    background: url('../../Welcome.jpg'), no-repeat center;
+    background-position: center;
+}

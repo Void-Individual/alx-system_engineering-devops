@@ -1,0 +1,29 @@
+server {
+        listen 80 default_server;
+        listen 8080 default_server;
+        listen [::]:80 default_server;
+
+        root /;
+        index hello.html;
+
+        server_name _;
+
+        location /hbnb_static {
+                alias /data/web_static/current/;}
+
+        location /airbnb-onepage/ {
+                include proxy_params;
+                proxy_pass http://localhost:5000;
+        }
+
+        error_page 404 /my_404.html;
+
+        location /redirect_me {
+                return 301 https://github.com/Void-Individual;
+        }
+
+        location / {
+                add_header X-Served-By "523915-web-01";
+                try_files $uri $uri/ =404;
+        }
+}
