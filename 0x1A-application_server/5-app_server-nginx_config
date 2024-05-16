@@ -1,0 +1,46 @@
+server {
+        listen 80 default_server;
+        listen 8080 default_server;
+        listen [::]:80 default_server;
+
+        add_header X-Served-By $hostname;
+
+        root /var/www/html;
+        index hello.html index.htm index.nginx-debian.html
+        server_name _;
+
+        location /hbnb_static {
+                alias /data/web_static/current/;
+        }
+
+        location /static/ {
+                alias /home/ubuntu/AirBnB_clone_v4/web_dynamic/static/;
+                try_files \$uri \$uri/ =404;
+        }
+
+        location /airbnb-onepage/ {
+                proxy_pass http://localhost:5000;
+        }
+
+        location ~^/airbnb-dynamic/number_odd_or_even/([0-9]+)$ {
+                proxy_pass http://localhost:5001/number_odd_or_even/$1;
+        }
+
+        location /api/ {
+                proxy_pass http://localhost:5002;
+                proxy_pass http://localhost:5002;
+        }
+
+        location / {
+                proxy_pass http://localhost:5003;
+        }
+
+        error_page 404 /my_404.html;
+        location = /my_404,html {
+                internal;
+        }
+
+        location /redirect_me {
+                return 301 https://github.com/Void-Individual;
+        }
+}
