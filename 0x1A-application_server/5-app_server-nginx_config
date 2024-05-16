@@ -19,19 +19,22 @@ server {
         }
 
         location /airbnb-onepage/ {
+                include proxy_params;
                 proxy_pass http://localhost:5000;
         }
 
-        location ~^/airbnb-dynamic/number_odd_or_even/([0-9]+)$ {
+        location ~ ^/airbnb-dynamic/number_odd_or_even/([0-9]+)$ {
+                include proxy_params;
                 proxy_pass http://localhost:5001/number_odd_or_even/$1;
         }
 
         location /api/ {
-                proxy_pass http://localhost:5002;
+                include proxy_params;
                 proxy_pass http://localhost:5002;
         }
 
         location / {
+                include proxy_params;
                 proxy_pass http://localhost:5003;
         }
 
